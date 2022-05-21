@@ -2,6 +2,9 @@ exports = module.exports = function(app, mongoose) {
 
     var express = require('express');
     var router = express.Router();
+    var path = require('path');
+    var fs = require('fs');
+
     const { Onfido, Region } = require("@onfido/api");
     const ONFIDO_API_TOKEN = app.get('ONFIDO_API_TOKEN')
 
@@ -65,6 +68,32 @@ exports = module.exports = function(app, mongoose) {
         }
       });
 
+      router.post('/upload', async function(req, res, next) {
+  
+        try {
+          const body = req.body;
+          console.log("body = ", body);
+  
+          const docUpload = await onfido.applicant.upload({
+              applicantId: body.applicantId,
+              file: fs.createReadStream(path.join(__dirname, '../assets/sample_driving_licence.png')),
+              type: "driving_licence",
+              "first_name": "Jane",
+              "last_name": "consider"
+          });
+          console.log("docUpload success = ", applicant);
+  
+          res.json({success: true, data: docUpload});
+          
+        } catch (err) {
+          res.send({
+              success: false,
+              err: err.message,
+              message: "Something went wrong, please try again later"
+          });
+        }
+      });
+
       router.post('/create-check', async function(req, res, next) {
   
         try {
@@ -72,7 +101,7 @@ exports = module.exports = function(app, mongoose) {
   
           const check = await onfido.check.create({
             applicantId: body.applicantId,
-            reportNames:  ["document", "facial_similarity_photo"],
+            reportNames:  ["document"],
         });
 
           console.log("getapplicant Applicant success = ", applicant);
