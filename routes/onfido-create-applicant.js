@@ -48,7 +48,7 @@ exports = module.exports = function(app, mongoose) {
       }
     });
 
-    router.get('/getapplicant', async function(req, res, next) {
+    router.post('/getapplicant', async function(req, res, next) {
   
         try {
           const body = req.body;
