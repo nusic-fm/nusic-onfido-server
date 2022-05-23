@@ -5,6 +5,7 @@ exports = module.exports = function(app, mongoose) {
     var path = require('path');
     var fs = require('fs');
 
+
     const { Onfido, Region } = require("@onfido/api");
     const ONFIDO_API_TOKEN = app.get('ONFIDO_API_TOKEN')
 
@@ -26,7 +27,6 @@ exports = module.exports = function(app, mongoose) {
     });
   
     router.post('/create', async function(req, res, next) {
-  
       try {
         const body = req.body;
         console.log("body = ", body);
