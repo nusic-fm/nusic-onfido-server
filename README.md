@@ -1,2 +1,2 @@
 # Nusic Onfido Server
-Repository for Integration of Onfido API
+Repository for Integration of Onfido KYC API

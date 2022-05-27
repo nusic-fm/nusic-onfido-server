@@ -59,7 +59,7 @@ exports = module.exports = function(app, mongoose) {
           } 
         }
 
-        return res.json({success: true, data: "KYC Completed"});
+        return res.json({success: false, data: "Unable to process request"});
         
       } catch (err) {
         res.send({
