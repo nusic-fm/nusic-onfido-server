@@ -241,6 +241,7 @@ exports = module.exports = function(app, mongoose) {
             return res.json({success: false, data: data});
           }
         } catch (err) {
+          console.log("Error = ",err);
           res.send({
               success: false,
               err: err.message,
